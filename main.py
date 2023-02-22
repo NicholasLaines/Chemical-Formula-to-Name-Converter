@@ -2,16 +2,12 @@
 user_formula = input("Enter your chemical equation: ")
 
 
-#imports and stuff
+#imports and blank variables
 import ele
 prefixes = []
 proccessed_formula = []
 element_names = []
 outbound = ""
-
-
-#prints a blank string to improve formating
-print("")
 
 
 #processes the string into a list of the chemical´s compnents
@@ -49,20 +45,22 @@ for item in proccessed_formula:
 if prefixes[0] == "Mon":
     prefixes[0] = ""
 
+
+#Converts the element symbol to its name using the dictionary in ele.py
 for item in proccessed_formula:
-    lol = item
-    lol = ''.join([i for i in lol if not i.isdigit()])
+    no_num = item
+    no_num = ''.join([i for i in no_num if not i.isdigit()])
     for i in range(1,119):
         current_element = ele.periodic[i]
-        if current_element[1] == lol:
+        if current_element[1] == no_num:
             element_names.append(current_element[0])
 
 
-print("")
-print(prefixes)
-print(element_names)
-
+#Combines atributes for output
 for item in element_names:
-    outbound = outbound + " "  + prefixes[element_names.index(item)] + item   
-    
-print(outbound)
+    outbound = outbound + prefixes[element_names.index(item)] + item + " "
+
+
+#Prints output + a blank line for readablity
+print("")
+print(outbound.title())
