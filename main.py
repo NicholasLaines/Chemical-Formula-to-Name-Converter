@@ -8,6 +8,7 @@ prefixes = []
 proccessed_formula = []
 element_names = []
 outbound = ""
+ionic_c = False
 
 
 #processes the string into a list of the chemical´s compnents
@@ -56,15 +57,31 @@ for item in proccessed_formula:
             element_names.append(current_element[0])
 
 
-#Combines atributes for output
-for item in element_names:
-    if outbound == "":
-        outbound = outbound + prefixes[element_names.index(item)] + item + " "
-    else:
-        root = item[:2]
-        ___ide = [string for string in ele.___ides if root in string]
-        ___ide = ___ide[0]
-        outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
+#Checks if the compound is an ionic compound
+if "N" and "H4" in proccessed_formula:
+    ionic_c = True
+    print("NH4")
+for item in proccessed_formula:
+    no_num = item
+    no_num = ''.join([i for i in no_num if not i.isdigit()])
+    for i in range(1,119):
+        current_element = ele.periodic[i]
+        if current_element[1] == no_num:
+            if current_element[2] == "M":
+                ionic_c = True
+                print("Metal")
+
+
+if ionic_c == False:
+    #Combines atributes for outputing covalent compounds
+    for item in element_names:
+        if outbound == "":
+            outbound = outbound + prefixes[element_names.index(item)] + item + " "
+        else:
+            root = item[:2]
+            ___ide = [string for string in ele.___ides if root in string]
+            ___ide = ___ide[0]
+            outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
 
 #Prints output + a blank line for readablity
 print("")
