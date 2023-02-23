@@ -60,7 +60,7 @@ for item in proccessed_formula:
 #Checks if the compound is an ionic compound
 if "N" and "H4" in proccessed_formula:
     ionic_c = True
-    print("NH4")
+    print("Amonium")
 for item in proccessed_formula:
     no_num = item
     no_num = ''.join([i for i in no_num if not i.isdigit()])
@@ -74,14 +74,17 @@ for item in proccessed_formula:
 
 if ionic_c == False:
     #Combines atributes for outputing covalent compounds
-    for item in element_names:
-        if outbound == "":
-            outbound = outbound + prefixes[element_names.index(item)] + item + " "
-        else:
-            root = item[:2]
-            ___ide = [string for string in ele.___ides if root in string]
-            ___ide = ___ide[0]
-            outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
+    if "H" in proccessed_formula:
+        print("Acid")
+    else:
+        for item in element_names:
+            if outbound == "":
+                outbound = outbound + prefixes[element_names.index(item)] + item + " "
+            else:
+                root = item[:2]
+                ___ide = [string for string in ele.___ides if root in string]
+                ___ide = ___ide[0]
+                outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
 
 #Prints output + a blank line for readablity
 print("")
