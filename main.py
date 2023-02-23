@@ -58,8 +58,13 @@ for item in proccessed_formula:
 
 #Combines atributes for output
 for item in element_names:
-    outbound = outbound + prefixes[element_names.index(item)] + item + " "
-
+    if outbound == "":
+        outbound = outbound + prefixes[element_names.index(item)] + item + " "
+    else:
+        root = item[:2]
+        ___ide = [string for string in ele.___ides if root in string]
+        ___ide = ___ide[0]
+        outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
 
 #Prints output + a blank line for readablity
 print("")
