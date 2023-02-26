@@ -1,19 +1,15 @@
-#takes the formula as a string from the user
-user_formula = input("Enter your chemical equation: ")
-
-
-#imports and blank variables
+#Creates inital variables (user inputs, blank variables and imports)
+user_formula = input('Enter your chemical equation: ')
 import ele
-prefixes = []
 proccessed_formula = []
-element_names = []
-outbound = ""
-ionic_c = False
+atomic_nums = []
+prefixes = []
+is_ionic = False
 
 
-#processes the string into a list of the chemical´s compnents
-sliced_formula = list(user_formula)
-for item in sliced_formula:
+#Processes the string into a list of the compound's compnents
+s_for = list(user_formula)
+for item in s_for:
     if item.isupper():
         proccessed_formula.append(item)
     else:
@@ -21,7 +17,7 @@ for item in sliced_formula:
         proccessed_formula[lpf] = proccessed_formula[lpf] + item
 
 
-#finds the prefixes for each of the items in the proccessed_formula list
+#Calculates the prefixes for each component of the compound
 for item in proccessed_formula:
     if "2" in item:
         prefixes.append("Di")
@@ -47,45 +43,33 @@ if prefixes[0] == "Mon":
     prefixes[0] = ""
 
 
-#Converts the element symbol to its name using the dictionary in ele.py
+#Converts the element symbol to its atomic number
+for item in proccessed_formula:
+    no_num = ''.join([i for i in item if not i.isdigit()])
+    for i in range(1,118):
+        current_element = ele.periodic[i]
+        if current_element[1] == no_num:
+            atomic_nums.append(i)
+
+
+#Checks if the compound is ionic by checking for metals or NH4 if it is it generates the formula
+if 'N' in proccessed_formula and 'H4' in proccessed_formula:
+    is_ionic = True
+    from ionic import gen_ion_com
+    gen_ion_com(proccessed_formula, atomic_nums, prefixes, False)
 for item in proccessed_formula:
     no_num = item
     no_num = ''.join([i for i in no_num if not i.isdigit()])
     for i in range(1,119):
         current_element = ele.periodic[i]
         if current_element[1] == no_num:
-            element_names.append(current_element[0])
+            if current_element[2] == 'M':
+                is_ionic = True
+                from ionic import gen_ion_com
+                gen_ion_com(proccessed_formula, atomic_nums, prefixes, True)
 
 
-#Checks if the compound is an ionic compound
-if "N" and "H4" in proccessed_formula:
-    ionic_c = True
-    print("Amonium")
-for item in proccessed_formula:
-    no_num = item
-    no_num = ''.join([i for i in no_num if not i.isdigit()])
-    for i in range(1,119):
-        current_element = ele.periodic[i]
-        if current_element[1] == no_num:
-            if current_element[2] == "M":
-                ionic_c = True
-                print("Metal")
-
-
-if ionic_c == False:
-    #Combines atributes for outputing covalent compounds
-    if "H" in proccessed_formula:
-        print("Acid")
-    else:
-        for item in element_names:
-            if outbound == "":
-                outbound = outbound + prefixes[element_names.index(item)] + item + " "
-            else:
-                root = item[:2]
-                ___ide = [string for string in ele.___ides if root in string]
-                ___ide = ___ide[0]
-                outbound = outbound + prefixes[element_names.index(item)] + ___ide + " "
-
-#Prints output + a blank line for readablity
-print("")
-print(outbound.title())
+#Checks if the compound is covalent by checking the is_ionic variable's status if it is it generates the formula
+if is_ionic == False:
+    from covalent import gen_cov_com
+    gen_cov_com(proccessed_formula, atomic_nums, prefixes)
