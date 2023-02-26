@@ -1,8 +1,8 @@
 This is a basic cli program that converts the chemical equation of a substance to the full chemical name of it.
 
-It currently only supports simple covalent compounds and will tell you which type of ionic the compound is if it is not covalent is only avalible in English.
+It currently only supports the highlighted parts of the flow chart below and it only avalible in ENglish.
 
-I do plan to translate it into French and add support for alternate chemical names including alternate names for elements Ferous Sulfide as well as the normal Iron Sulfide and acid nomenclatures like Hydrocloric Acid for Hydrogen Cloride. I do not however plan to add common alternate names like Water for Dihydrogen Monoxide.
+I do plan to translate it into French and support complex compounds but that is not avalible yet.
 
 
 
