@@ -1,10 +1,33 @@
 def gen_ion_com(proccessed_formula, atomic_nums, prefixes, metalic):
     import ele
     outbound = ''
+    subscripts = []
     
+    for item in proccessed_formula:
+        if "2" in item:
+            subscripts.append(2)
+        elif "3" in item:
+            subscripts.append(3)
+        elif "4" in item:
+            subscripts.append(4)
+        elif "5" in item:
+            subscripts.append(5)
+        elif "6" in item:
+            subscripts.append(6)
+        elif "7" in item:
+            subscripts.append(7)
+        elif "8" in item:
+            subscripts.append(8)
+        elif "9" in item:
+            subscripts.append(9)
+        elif "10" in item:
+            subscripts.append(10)
+        else:
+            subscripts.append(1)
+
     
-    num_map = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'),
-           (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+    #Converts numbers to roman numerals
+    num_map = [(10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
     def num2roman(num):
         roman = ''
         while num > 0:
@@ -38,7 +61,8 @@ def gen_ion_com(proccessed_formula, atomic_nums, prefixes, metalic):
             if len(proccessed_formula) == 2:
                 metal = list(set(atomic_nums).intersection(typeii))
                 atomic_nums.remove(metal[0])
-                numeral = '(' + num2roman(abs(ele.periodic[atomic_nums[0]][4])) + ')'
+                charge = abs(ele.periodic[atomic_nums[0]][4]) * subscripts[1] / subscripts[0]
+                numeral = '(' + num2roman(charge) + ')'
                 outbound = ele.periodic[metal[0]][0] + ' ' + numeral + ' ' + ele.periodic[atomic_nums[0]][3] + 'ide'
             else:
                 outbound = 'polyatomic type ii metal based ionic'
