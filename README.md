@@ -6,4 +6,4 @@ I do plan to translate it into French and support complex compounds but that is 
 
 
 
-![221031456-d2644c66-0c25-4583-b4a3-abb4d53bdac8](https://user-images.githubusercontent.com/121262995/221388763-47ef0a94-2d5d-4def-858e-4a7d017b8803.jpg)
+![221388763-47ef0a94-2d5d-4def-858e-4a7d017b8803 jpg](https://user-images.githubusercontent.com/121262995/224468153-89882111-7ed3-4ceb-8f7a-4db285d8ced6.png)
